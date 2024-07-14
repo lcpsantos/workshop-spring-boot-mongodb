@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WorshopmongoApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WorshopmongoApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
