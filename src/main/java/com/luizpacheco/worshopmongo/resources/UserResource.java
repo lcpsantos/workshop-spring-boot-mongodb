@@ -2,10 +2,11 @@ package com.luizpacheco.worshopmongo.resources;
 
 import com.luizpacheco.worshopmongo.domain.entitie.User;
 import com.luizpacheco.worshopmongo.dto.UserDTO;
-import com.luizpacheco.worshopmongo.services.UserServices;
+import com.luizpacheco.worshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 public class UserResource {
 
     @Autowired
-    private UserServices service;
+    private UserService service;
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll() {
@@ -28,5 +29,12 @@ public class UserResource {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok().body(listDto);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<UserDTO> findById(@PathVariable String id) {
+        var user = service.findById(id);
+
+        return ResponseEntity.ok().body(new UserDTO(user));
     }
 }
