@@ -1,6 +1,7 @@
 package com.luizpacheco.worshopmongo.services;
 
 import com.luizpacheco.worshopmongo.domain.entitie.User;
+import com.luizpacheco.worshopmongo.dto.UserDTO;
 import com.luizpacheco.worshopmongo.repository.UserRepository;
 import com.luizpacheco.worshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,13 @@ public class UserService {
             throw new ObjectNotFoundException("Objeto não encontrado");
         }
         return user;
+    }
+
+    public User insert(User user) {
+        return repository.insert(user);
+    }
+
+    public User fromDTO(UserDTO userDTO) {
+        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
     }
 }
