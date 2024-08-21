@@ -1,6 +1,6 @@
 package com.luizpacheco.worshopmongo.dto;
 
-import com.luizpacheco.worshopmongo.domain.entitie.User;
+import com.luizpacheco.worshopmongo.domain.User;
 
 public class UserDTO {
 

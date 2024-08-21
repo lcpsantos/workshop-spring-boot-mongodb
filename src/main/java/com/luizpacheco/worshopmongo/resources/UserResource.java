@@ -1,6 +1,6 @@
 package com.luizpacheco.worshopmongo.resources;
 
-import com.luizpacheco.worshopmongo.domain.entitie.User;
+import com.luizpacheco.worshopmongo.domain.User;
 import com.luizpacheco.worshopmongo.dto.UserDTO;
 import com.luizpacheco.worshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
