@@ -3,7 +3,7 @@ package com.luizpacheco.worshopmongo.resources;
 import com.luizpacheco.worshopmongo.domain.User;
 import com.luizpacheco.worshopmongo.dto.UserDTO;
 import com.luizpacheco.worshopmongo.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,17 +13,17 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/users")
+@RequiredArgsConstructor
 public class UserResource {
 
-    @Autowired
-    private UserService service;
+    private final UserService service;
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll() {
         List<User> list = service.findAll();
 
         List<UserDTO> listDto = list.stream()
-                .map(x -> new UserDTO(x))
+                .map(UserDTO::new)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok().body(listDto);

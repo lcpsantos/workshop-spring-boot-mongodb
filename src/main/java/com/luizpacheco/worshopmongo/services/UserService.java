@@ -4,17 +4,17 @@ import com.luizpacheco.worshopmongo.domain.User;
 import com.luizpacheco.worshopmongo.dto.UserDTO;
 import com.luizpacheco.worshopmongo.repository.UserRepository;
 import com.luizpacheco.worshopmongo.services.exception.ObjectNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepository repository;
+    private final UserRepository repository;
 
     public List<User> findAll() {
         return repository.findAll();
@@ -28,8 +28,8 @@ public class UserService {
         return user;
     }
 
-    public User insert(User user) {
-        return repository.insert(user);
+    public void insert(User user) {
+        repository.insert(user);
     }
 
     public void delete(String id) {
@@ -37,11 +37,11 @@ public class UserService {
         repository.deleteById(id);
     }
 
-    public User update(User user) {
+    public void update(User user) {
         var newUser = findById(user.getId());
         updateData(newUser, user);
 
-        return repository.save(newUser);
+        repository.save(newUser);
     }
 
     private void updateData(User newUser, User user) {
@@ -50,6 +50,6 @@ public class UserService {
     }
 
     public User fromDTO(UserDTO userDTO) {
-        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
+        return new User(userDTO.id(), userDTO.name(), userDTO.email());
     }
 }
