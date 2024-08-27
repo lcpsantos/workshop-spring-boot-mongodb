@@ -6,6 +6,7 @@ import com.luizpacheco.worshopmongo.services.exception.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -20,5 +21,9 @@ public class PostService {
             throw new ObjectNotFoundException("Objeto não encontrado");
         }
         return post;
+    }
+
+    public List<Post> findByTitle(String text) {
+        return repository.findByTitleContainingIgnoreCase(text);
     }
 }
