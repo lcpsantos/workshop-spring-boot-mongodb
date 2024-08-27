@@ -1,5 +1,6 @@
 package com.luizpacheco.worshopmongo.resources;
 
+import com.luizpacheco.worshopmongo.domain.Post;
 import com.luizpacheco.worshopmongo.domain.User;
 import com.luizpacheco.worshopmongo.dto.UserDTO;
 import com.luizpacheco.worshopmongo.services.UserService;
@@ -34,6 +35,13 @@ public class UserResource {
         var user = service.findById(id);
 
         return ResponseEntity.ok().body(new UserDTO(user));
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        var user = service.findById(id);
+
+        return ResponseEntity.ok().body(user.getPosts());
     }
 
     @PostMapping
